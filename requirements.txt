@@ -1,0 +1,8 @@
+Django>=4.2.0
+python-dateutil>=2.8.2
+django-crispy-forms>=2.0
+crispy-bootstrap5>=0.7
+psycopg2-binary>=2.9.9  # For PostgreSQL
+python-dotenv>=1.0.0    # For environment variables
+gunicorn>=21.2.0        # For production deployment
+whitenoise>=6.6.0       # For static files in production 

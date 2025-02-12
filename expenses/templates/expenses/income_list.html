@@ -1,0 +1,38 @@
+{% extends 'expenses/base.html' %}
+
+{% block content %}
+<h2>Income</h2>
+
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Recurring</th>
+            <th>Tag</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for income in incomes %}
+        <tr>
+            <td>{{ income.title }}</td>
+            <td>${{ income.amount }}</td>
+            <td>{{ income.date|date:"M d, Y" }}</td>
+            <td>{{ income.is_recurring|yesno:"Yes,No" }}</td>
+            <td>{{ income.tag }}</td>
+            <td>
+                <a href="{% url 'expenses:income-edit' income.pk %}" class="btn btn-sm btn-primary">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <a href="{% url 'expenses:expense-add' %}" class="btn btn-success">Add Expense</a>
+    <a href="{% url 'expenses:income-add' %}" class="btn btn-info">Add Income</a>
+    <a href="{% url 'expenses:dashboard' %}" class="btn btn-primary">Go Home</a>
+</div>
+{% endblock %} 

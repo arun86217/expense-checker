@@ -1,0 +1,35 @@
+{% extends 'expenses/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Financial Calendar {{ year }}</h2>
+    <div class="btn-group">
+        <a href="?year={{ prev_year }}" class="btn btn-outline-primary">&larr; {{ prev_year }}</a>
+        <a href="?year={{ next_year }}" class="btn btn-outline-primary">{{ next_year }} &rarr;</a>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+    {% for month in months %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ month.name }}</h5>
+                <p class="card-text">
+                    Total Expenses: ${{ month.total_expenses|floatformat:2 }}<br>
+                    Total Income: ${{ month.total_income|floatformat:2 }}<br>
+                    Balance: ${{ month.balance|floatformat:2 }}
+                </p>
+                <a href="{% url 'expenses:month-detail' year=year month=month.number %}" 
+                   class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'expenses:expense-add' %}" class="btn btn-success">Add Expense</a>
+    <a href="{% url 'expenses:income-add' %}" class="btn btn-info">Add Income</a>
+</div>
+{% endblock %} 
